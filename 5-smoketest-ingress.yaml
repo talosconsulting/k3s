@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: smoketest
+  name: smoketest-ingress
+spec:
+  rules:
+  - host: smoketest.lan
+    http:
+      paths:
+      - backend:
+          service:
+            name: smoketest-service
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

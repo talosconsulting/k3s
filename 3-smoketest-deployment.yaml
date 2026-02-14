@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: smoketest
+  labels:
+    app: smoketest-deployment
+  name: smoketest-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smoketest-deployment
+  template:
+    metadata:
+      labels:
+        app: smoketest-deployment
+    spec:
+      containers:
+        - image: nginxinc/nginx-unprivileged:1.29-alpine3.23
+          name: nginx-unprivileged
+          volumeMounts:
+            - name: smoketest-pvc
+              mountPath: /mnt/data
+      volumes:
+        - name: smoketest-pvc
+          persistentVolumeClaim:
+            claimName: smoketest-pvc
