@@ -42,3 +42,9 @@ sudo systemctl disable --now k3s.service
 sudo /usr/bin/k3s server --cluster-reset
 sudo rm -rf /var/lib/rancher/k3s/
 ```
+
+## upgrading
+```bash
+k apply -k github.com/rancher/system-upgrade-controller
+k apply -f plan.yaml
+```
